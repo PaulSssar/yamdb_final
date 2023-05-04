@@ -58,7 +58,7 @@ class UserViewSet(viewsets.ModelViewSet):
         detail=False,
         methods=['get', 'patch'],
         url_path='me',
-        permission_classes=(IsAuthenticated, )
+        permission_classes=(IsAuthenticated,)
     )
     def get_profile(self, request):
         """Метод получает/редактирует данные своей учетной записи."""
@@ -112,14 +112,13 @@ class TitleViewSet(viewsets.ModelViewSet):
     queryset = Title.objects.all()
     search_fields = ('name',)
     permission_classes = (IsAuthenticatedOrReadOnly,
-                          IsSuperUserOrIsAdminOrReadOnly, )
-    filter_backends = (DjangoFilterBackend, filters.OrderingFilter, )
+                          IsSuperUserOrIsAdminOrReadOnly,)
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter,)
     filterset_class = TitleFilter
 
     def get_queryset(self):
-        queryset = (Title.objects.annotate(rating=Avg('title__score')).
-                    order_by('-rating'))
-        return queryset
+        return (Title.objects.annotate(rating=Avg('title__score')).
+                order_by('-rating'))
 
     def get_serializer_class(self):
         if self.action in ('list', 'retrieve'):
@@ -137,7 +136,7 @@ class CategoryViewSet(viewsets.GenericViewSet,
     filter_backends = (filters.SearchFilter,)
     search_fields = ('name',)
     permission_classes = (IsAuthenticatedOrReadOnly,
-                          IsSuperUserOrIsAdminOrReadOnly, )
+                          IsSuperUserOrIsAdminOrReadOnly,)
     lookup_field = 'slug'
 
 
@@ -149,9 +148,9 @@ class GenreViewSet(viewsets.GenericViewSet,
     queryset = Genre.objects.all()
     serializer_class = GenresSerializer
     filter_backends = (filters.SearchFilter,)
-    search_fields = ('name', )
+    search_fields = ('name',)
     permission_classes = (IsAuthenticatedOrReadOnly,
-                          IsSuperUserOrIsAdminOrReadOnly, )
+                          IsSuperUserOrIsAdminOrReadOnly,)
     lookup_field = 'slug'
 
 
@@ -160,7 +159,7 @@ class ReviewsViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewsSerializer
     pagination_class = PagePaginations
     permission_classes = (IsAuthenticatedOrReadOnly,
-                          IsAuthOrSuperUserOrModOrAdminOrReadOnly, )
+                          IsAuthOrSuperUserOrModOrAdminOrReadOnly,)
 
     def select_objects(self):
         title_id = self.kwargs.get("title_id")
@@ -180,7 +179,7 @@ class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentsSerializer
     pagination_class = PagePaginations
     permission_classes = (IsAuthenticatedOrReadOnly,
-                          IsAuthOrSuperUserOrModOrAdminOrReadOnly, )
+                          IsAuthOrSuperUserOrModOrAdminOrReadOnly,)
 
     def select_objects(self):
         review_id = self.kwargs.get("review_id")
