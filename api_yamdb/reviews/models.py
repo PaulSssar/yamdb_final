@@ -3,7 +3,6 @@ from datetime import datetime
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-
 from users.models import User
 
 
@@ -53,7 +52,7 @@ def validate_year(value):
     """Валидация года."""
     if value > datetime.now().year:
         raise ValidationError('Мы ещё не в будущем!')
-    elif value < 0:
+    if value < 0:
         raise ValidationError('Запрещены отрицательные значения!')
 
 
