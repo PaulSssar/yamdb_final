@@ -1,3 +1,12 @@
+from api.permissions import (IsAuthOrSuperUserOrModOrAdminOrReadOnly,
+                             IsSuperUserOrIsAdmin,
+                             IsSuperUserOrIsAdminOrReadOnly)
+from api.serializers import (AuthUserSerializer, CategoriesSerializer,
+                             CommentsSerializer, GenresSerializer,
+                             ReviewsSerializer, TitlesGetSerializer,
+                             TitlesSerializer, TokenUserSerializer,
+                             UserSerializer)
+from api.utils import send_confirmation_code
 from django.contrib.auth.tokens import default_token_generator
 from django.db.models import Avg
 from django.shortcuts import get_object_or_404
@@ -9,16 +18,6 @@ from rest_framework.permissions import (AllowAny, IsAuthenticated,
                                         IsAuthenticatedOrReadOnly)
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import AccessToken
-
-from api.permissions import (IsAuthOrSuperUserOrModOrAdminOrReadOnly,
-                             IsSuperUserOrIsAdmin,
-                             IsSuperUserOrIsAdminOrReadOnly)
-from api.serializers import (AuthUserSerializer, CategoriesSerializer,
-                             CommentsSerializer, GenresSerializer,
-                             ReviewsSerializer, TitlesGetSerializer,
-                             TitlesSerializer, TokenUserSerializer,
-                             UserSerializer)
-from api.utils import send_confirmation_code
 from reviews.models import Category, Genre, Review, Title
 from users.models import User
 
